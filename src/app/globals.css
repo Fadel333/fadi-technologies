@@ -1,26 +1,180 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================
+   FADI Technologies — Design Tokens
+   ============================================ */
+
+/* Define which variant class controls dark mode.
+   We use [data-theme="dark"] so JS can toggle it explicitly,
+   instead of relying only on system preference. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------- Theme tokens ---------- */
+@theme {
+  /* Brand colors */
+  --color-accent: #7c3aed;          /* electric violet */
+  --color-accent-hover: #6d28d9;
+  --color-terminal: #22d3ee;        /* cyan — for terminal / mono bits */
+  --color-terminal-dim: #0e7490;
+
+  /* Surface colors — light mode defaults */
+  --color-bg: #fafafa;              /* warm off-white */
+  --color-surface: #ffffff;         /* cards */
+  --color-surface-muted: #f4f4f5;   /* alt sections */
+  --color-border: #e4e4e7;
+
+  /* Text */
+  --color-fg: #0a0a0a;              /* primary text */
+  --color-fg-muted: #71717a;        /* secondary text */
+  --color-fg-subtle: #a1a1aa;       /* tertiary / captions */
+
+  /* Feedback */
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-error: #dc2626;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Fonts — wired in the next move via next/font variables */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---------- Dark mode overrides ---------- */
+/* We redefine the SAME token names under [data-theme="dark"].
+   Tailwind's utilities will pick these up automatically. */
+[data-theme="dark"] {
+  --color-bg: #0a0a0b;
+  --color-surface: #131316;
+  --color-surface-muted: #1a1a1f;
+  --color-border: #27272a;
+
+  --color-fg: #f4f4f5;
+  --color-fg-muted: #a1a1aa;
+  --color-fg-subtle: #71717a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------- Base layer ---------- */
+@layer base {
+  html {
+    /* Disable the browser's system theme flash — we control it via JS */
+    color-scheme: light dark;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------- Utility: selection color ---------- */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* ============================================
+   Signature moment — ambient mesh background
+   ============================================ */
+
+.ambient {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* The layers that drift */
+.ambient::before,
+.ambient::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+/* Violet bloom */
+.ambient::before {
+  background: radial-gradient(
+    circle at 30% 40%,
+    var(--color-accent) 0%,
+    transparent 55%
+  );
+  opacity: 0.22;
+  animation: ambient-drift-a 90s ease-in-out infinite alternate;
+}
+
+/* Cyan bloom */
+.ambient::after {
+  background: radial-gradient(
+    circle at 70% 60%,
+    var(--color-terminal) 0%,
+    transparent 55%
+  );
+  opacity: 0.12;
+  animation: ambient-drift-b 70s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-drift-a {
+  0% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, 2%, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-3%, 5%, 0) scale(1.02);
+  }
+}
+
+@keyframes ambient-drift-b {
+  0% {
+    transform: translate3d(5%, 3%, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-4%, -5%, 0) scale(0.98);
+  }
+  100% {
+    transform: translate3d(6%, -2%, 0) scale(1.06);
+  }
+}
+
+/* Respect reduced motion — freeze the gradients */
+@media (prefers-reduced-motion: reduce) {
+  .ambient::before,
+  .ambient::after {
+    animation: none;
+  }
+}
+
+/* Slightly stronger in dark mode since the background is already dark */
+[data-theme="dark"] .ambient::before {
+  opacity: 0.28;
+}
+[data-theme="dark"] .ambient::after {
+  opacity: 0.16;
 }

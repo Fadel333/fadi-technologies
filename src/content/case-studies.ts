@@ -1,0 +1,77 @@
+export type CaseStudy = {
+  slug: string;
+  name: string;
+  tagline: string;
+  year: string;
+  status: "live" | "in-progress" | "paused" | "concept";
+  role: string;
+  stack: string[];
+  liveUrl?: string;
+  repoUrl?: string;
+  videoUrl?: string;
+  posterImage?: string;
+  problem: string[];
+  approach: string[];
+  outcome: string[];
+  metrics?: { value: string; label: string }[];
+};
+
+export const caseStudies: Record<string, CaseStudy> = {
+  "talentforge-ai": {
+    slug: "talentforge-ai",
+    name: "TalentForge AI",
+    tagline: "AI career intelligence for African job seekers",
+    year: "2026 – present",
+    status: "live",
+    role: "Founder & full-stack engineer",
+    stack: ["Next.js", "Python", "Postgres", "Vector DB", "RAG"],
+    liveUrl: "https://career-intelligence-3.onrender.com",
+    repoUrl: "https://github.com/Fadel333/career-intelligence",
+    videoUrl: "",
+    posterImage: "/talentforge-poster.jpg",
+    problem: [
+      "African graduates apply to dozens of roles with generic CVs that don't match what regional employers actually ask for. The problem isn't effort — it's feedback. Job seekers rarely learn why an application fails.",
+      "Existing career tools are tuned to US and European hiring patterns. They miss the specific language, credentials, and regional expectations that shape hiring across African markets.",
+    ],
+    approach: [
+      "I built a retrieval-augmented generation (RAG) pipeline that indexes regional job descriptions alongside applicant profiles. Instead of generic advice, users get concrete matches and gaps explained in their own context.",
+      "The stack is Next.js on the frontend for fast iteration, with a Python service handling embedding, vector search, and LLM orchestration. Postgres backs the relational data; a vector store handles semantic matching.",
+      "Every recommendation surfaces its source — the exact job posting or skill signal that produced it — so users can trust the output instead of guessing whether the AI is hallucinating.",
+    ],
+    outcome: [
+      "TalentForge AI is live and in active iteration. Early users have reported clearer feedback on applications and faster role discovery.",
+      "The project has become the foundation for how FADI Technologies approaches AI more broadly — RAG where it helps, deterministic code where it doesn't.",
+    ],
+    metrics: [
+      { value: "Live", label: "Status" },
+      { value: "RAG", label: "Core tech" },
+      { value: "Africa", label: "Market focus" },
+    ],
+  },
+
+  "trading-bot-fawzi": {
+    slug: "trading-bot-fawzi",
+    name: "Trading Bot",
+    tagline: "Client-commissioned Telegram bot with AI-driven signals",
+    year: "2025",
+    status: "in-progress",
+    role: "Solo engineer (client work)",
+    stack: ["Flask", "Telegram API", "Postgres", "AI"],
+    videoUrl: "",
+    problem: [
+      "A client wanted to run a signal-driven trading operation over Telegram but had no infrastructure for it. Existing bots were either black boxes or required constant babysitting.",
+    ],
+    approach: [
+      "Built a Flask service that subscribes to market data, evaluates signals against configurable rules, and pushes trades through Telegram with a consistent interface.",
+      "Postgres logs every trade for later analysis. The AI layer scores signals based on historical outcomes.",
+    ],
+    outcome: [
+      "Built and demoed. Hosting is the next step — the code is functional and the client is using it in testing.",
+    ],
+    metrics: [
+      { value: "Client", label: "Type" },
+      { value: "Built", label: "Status" },
+      { value: "Flask", label: "Core" },
+    ],
+  },
+};
