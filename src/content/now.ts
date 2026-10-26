@@ -7,6 +7,15 @@ export type NowEntry = {
 
 export const nowEntries: NowEntry[] = [
   {
+    date: "2026-10-25", // Updated date
+    title: "Shipped Klik Haus — live photography platform",
+    body: [
+      "Just pushed Klik Haus to production. It's a full-stack photography platform built for a Ghana-based photographer, focused on cinematic, unposed event coverage.",
+      "Built with Next.js and Tailwind, deployed on Vercel. The focus was on editorial design, fast load times, and a clean booking inquiry flow.",
+    ],
+    tags: ["shipped", "klik-haus"],
+  },
+  {
     date: "2026-09-12",
     title: "Building FADI Technologies' own site",
     body: [
@@ -36,7 +45,7 @@ export const nowEntries: NowEntry[] = [
 ];
 
 export const currentFocus = {
-  building: "TalentForge AI + FADI site",
+  building: "TalentForge AI + Client Projects",
   learning: "Advanced RAG patterns, Postgres internals",
   reading: "Designing Data-Intensive Applications",
   open_to: "Select client work — AI systems, full-stack apps",

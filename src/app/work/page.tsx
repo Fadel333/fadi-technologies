@@ -9,7 +9,6 @@ export const metadata: Metadata = {
     "Products shipped by FADI Technologies — AI systems, full-stack apps, and security tools for African markets.",
 };
 
-// Updated to match the dark terminal aesthetic
 const statusStyles: Record<string, string> = {
   live: "text-emerald-400",
   "in-progress": "text-pink-500",
@@ -89,31 +88,44 @@ export default function WorkPage() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {shippedProjects.map((proj) => (
-            <Link
+            <div
               key={proj.slug}
-              href={`/work/${proj.slug}`}
               className="group flex flex-col justify-between rounded-lg border border-gray-800 bg-[#121214] p-6 transition-all hover:-translate-y-1 hover:border-pink-500/50 hover:shadow-lg hover:shadow-pink-500/5"
             >
-              <div className="flex items-center justify-between">
-                <span
-                  className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider ${statusStyles[proj.status]}`}
+              <Link href={`/work/${proj.slug}`} className="flex-1">
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider ${statusStyles[proj.status]}`}
+                  >
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
+                    {proj.status}
+                  </span>
+                  <span className="font-mono text-[10px] text-gray-600">
+                    {proj.year}
+                  </span>
+                </div>
+                <div className="mt-8">
+                  <h3 className="text-lg font-bold text-white group-hover:text-pink-500 transition-colors">
+                    {proj.name}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-400">
+                    {proj.tagline}
+                  </p>
+                </div>
+              </Link>
+
+              {/* Live Link Button (Only shows if liveUrl exists) */}
+              {proj.liveUrl && (
+                <a
+                  href={proj.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 flex items-center justify-center gap-2 rounded-md border border-gray-700 bg-[#09090b] px-4 py-2 font-mono text-xs text-gray-300 transition-colors hover:border-pink-500 hover:text-pink-500"
                 >
-                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
-                  {proj.status}
-                </span>
-                <span className="font-mono text-[10px] text-gray-600">
-                  {proj.year}
-                </span>
-              </div>
-              <div className="mt-8">
-                <h3 className="text-lg font-bold text-white group-hover:text-pink-500 transition-colors">
-                  {proj.name}
-                </h3>
-                <p className="mt-2 text-xs leading-relaxed text-gray-400">
-                  {proj.tagline}
-                </p>
-              </div>
-            </Link>
+                  Visit Live ↗
+                </a>
+              )}
+            </div>
           ))}
         </div>
       </section>

@@ -39,10 +39,21 @@ export type Project = {
   year: string;
   stack: string[];
   href?: string;
+  liveUrl?: string;
   private?: boolean;
 };
 
 export const shippedProjects: Project[] = [
+  {
+    slug: "klik-haus",
+    name: "Klik Haus",
+    tagline:
+      "Cinematic photography platform for life's most important days. Quiet, observational, unposed.",
+    status: "live",
+    year: "2026",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    liveUrl: "https://photographer-web-omega.vercel.app/",
+  },
   {
     slug: "trading-bot-fawzi",
     name: "Trading Bot",

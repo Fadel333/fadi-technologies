@@ -74,4 +74,35 @@ export const caseStudies: Record<string, CaseStudy> = {
       { value: "Flask", label: "Core" },
     ],
   },
+
+  "klik-haus": {
+    slug: "klik-haus",
+    name: "Klik Haus",
+    tagline: "Cinematic photography for life's most important days",
+    year: "2026",
+    status: "live",
+    role: "Full-stack Engineer & Designer",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    liveUrl: "https://photographer-web-omega.vercel.app/",
+    videoUrl: "",
+    posterImage: "/klik-haus-poster.jpg",
+    problem: [
+      "Photographers in Ghana often rely on Instagram or generic template sites to showcase their work. These platforms don't reflect the premium, cinematic, and quiet nature of event photography.",
+      "There is no easy way for clients to understand the photographer's approach, browse a curated gallery, and inquire about bookings in one seamless, elegant experience.",
+    ],
+    approach: [
+      "Built a high-end, editorial-style photography platform using Next.js and Tailwind CSS. The design prioritizes large, high-quality images and smooth transitions, letting the photography speak for itself.",
+      "Implemented a clean, user-friendly booking inquiry flow. The site is deployed on Vercel with a focus on fast load times and mobile responsiveness, ensuring it looks perfect on any device.",
+      "The copy and structure are designed to tell a story — from the quiet, observational approach to the 'three things we never compromise on' — building trust with potential clients before they even reach out.",
+    ],
+    outcome: [
+      "Klik Haus is live and serving as a professional portfolio for the photographer. The platform successfully handles inquiries and showcases the photographer's best work.",
+      "It serves as a testament to the ability to build fast, beautiful, and functional front-end platforms tailored to specific creative industries.",
+    ],
+    metrics: [
+      { value: "Live", label: "Status" },
+      { value: "Next.js", label: "Framework" },
+      { value: "Editorial", label: "Design Style" },
+    ],
+  },
 };
