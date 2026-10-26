@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s — FADI Technologies",
   },
   description:
-    "An independent product studio shipping AI-powered software for African markets. From RAG systems to full-stack apps to security — built to launch, not to demo.",
+     "An independent product studio shipping AI systems, full-stack platforms, and security tools for African markets. Built to launch, not to demo.",
   openGraph: {
     type: "website",
     locale: "en_US",
