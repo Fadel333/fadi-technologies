@@ -16,9 +16,9 @@ const HELP_TEXT = [
 
 const RESPONSES: Record<string, string[]> = {
   whoami: [
-    "Gen Z software developer.",
+    "Independent software developer.",
     "Founder, FADI Technologies.",
-    "Aspiring everything. Shipping anyway.",
+    "Building in silence. Shipping anyway.",
   ],
   "skills --list": [
     "→ Full-stack:  Next.js, Python, Postgres, Flask",
@@ -28,14 +28,14 @@ const RESPONSES: Record<string, string[]> = {
   ],
   "work --all": [
     "→ TalentForge AI       [live]",
-    "→ Trading Bot          [in-progress]",
+    "→ Klik Haus            [in-progress]",
     "→ Qiyam                [live]",
     "→ Queen Latifa         [live]",
     "Type `open /work` to see all.",
   ],
   "contact --email": [
     "→ fadiliddrisu24@gmail.com",
-    "→ github.com/your-handle",
+    "→ github.com/Fadel333",
   ],
   help: HELP_TEXT,
 };
@@ -62,14 +62,12 @@ export function Terminal() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Focus input when opened
   useEffect(() => {
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [open]);
 
-  // Auto-scroll to bottom
   useEffect(() => {
     scrollRef.current?.scrollTo({
       top: scrollRef.current.scrollHeight,
@@ -119,13 +117,12 @@ export function Terminal() {
   }
 
   if (!open) {
-    // Hidden trigger — a small fixed dot in the bottom-right corner
     return (
       <button
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Open terminal (Ctrl + backtick)"
-        className="fixed bottom-5 right-5 z-40 flex h-8 w-8 items-center justify-center rounded-md border border-border bg-surface font-mono text-[10px] text-fg-subtle transition-colors hover:border-accent hover:text-accent"
+        className="fixed bottom-5 right-5 z-40 flex h-9 w-9 items-center justify-center rounded-md border border-gray-800 bg-[#121214] font-mono text-xs text-gray-400 transition-all hover:border-pink-500 hover:text-pink-500 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)]"
         title="Open terminal (Ctrl + `)"
       >
         &gt;_
@@ -135,16 +132,16 @@ export function Terminal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm sm:items-center"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/80 p-4 backdrop-blur-sm sm:items-center"
       onClick={() => setOpen(false)}
     >
       <div
-        className="w-full max-w-2xl overflow-hidden rounded-lg border border-border bg-[#0a0a0b] shadow-2xl"
+        className="w-full max-w-2xl overflow-hidden rounded-xl border border-gray-800 bg-[#09090b] shadow-[0_0_50px_rgba(236,72,153,0.15)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Title bar */}
-        <div className="flex items-center justify-between border-b border-border bg-[#131316] px-3 py-2">
-          <div className="flex items-center gap-2 font-mono text-[11px] text-fg-muted">
+        <div className="flex items-center justify-between border-b border-gray-800 bg-[#121214] px-4 py-3">
+          <div className="flex items-center gap-2 font-mono text-[11px] text-gray-400">
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#28c840]" />
@@ -154,33 +151,33 @@ export function Terminal() {
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Close terminal"
-            className="font-mono text-xs text-fg-subtle transition-colors hover:text-fg"
+            className="font-mono text-xs text-gray-500 transition-colors hover:text-white"
           >
-            esc
+            [ESC]
           </button>
         </div>
 
         {/* Output */}
         <div
           ref={scrollRef}
-          className="max-h-[60vh] min-h-[280px] overflow-y-auto p-4 font-mono text-[13px] leading-relaxed"
+          className="max-h-[60vh] min-h-[280px] overflow-y-auto p-5 font-mono text-[13px] leading-relaxed"
         >
           {lines.map((line, i) => (
             <div key={i} className="whitespace-pre-wrap">
               {line.type === "input" ? (
                 <>
-                  <span className="text-terminal">$ </span>
-                  <span className="text-fg">{line.text}</span>
+                  <span className="text-pink-500">$ </span>
+                  <span className="text-white">{line.text}</span>
                 </>
               ) : (
-                <span className="text-fg-muted">{line.text}</span>
+                <span className="text-gray-400">{line.text}</span>
               )}
             </div>
           ))}
 
           {/* Prompt */}
-          <div className="flex items-center">
-            <span className="text-terminal">$&nbsp;</span>
+          <div className="flex items-center mt-2">
+            <span className="text-pink-500">$&nbsp;</span>
             <input
               ref={inputRef}
               value={input}
@@ -191,7 +188,7 @@ export function Terminal() {
                   run(input);
                 }
               }}
-              className="flex-1 bg-transparent text-fg outline-none placeholder:text-fg-subtle/50"
+              className="flex-1 bg-transparent text-white outline-none placeholder:text-gray-600"
               placeholder="type a command..."
               spellCheck={false}
               autoComplete="off"

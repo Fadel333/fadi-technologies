@@ -15,7 +15,7 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0a0a0b",
+          background: "#09090b", // Matches the new site background
           color: "#f4f4f5",
           padding: "80px",
           fontFamily: "monospace",
@@ -30,12 +30,12 @@ export default async function Image() {
             width: "100%",
           }}
         >
-          <div style={{ display: "flex", fontSize: 28, fontWeight: 700, letterSpacing: -0.5 }}>
+          <div style={{ display: "flex", fontSize: 32, fontWeight: 700, letterSpacing: -0.5 }}>
             <span>FADI</span>
-            <span style={{ color: "#7c3aed" }}>.</span>
+            <span style={{ color: "#ec4899" }}>.</span> {/* Pink accent */}
           </div>
           <div style={{ display: "flex", fontSize: 20, color: "#71717a" }}>
-            faditechnologies.com
+            [ SYSTEM ONLINE ] // faditechnologies.com
           </div>
         </div>
 
@@ -45,27 +45,27 @@ export default async function Image() {
             style={{
               display: "flex",
               flexWrap: "wrap",
-              fontSize: 72,
-              fontWeight: 600,
+              fontSize: 76,
+              fontWeight: 800, // Made it bolder
               lineHeight: 1.05,
               letterSpacing: -2,
-              maxWidth: 900,
+              maxWidth: 950,
             }}
           >
-            <span>We ship AI-powered products for&nbsp;</span>
-            <span style={{ color: "#7c3aed" }}>African markets</span>
+            <span>Building AI products for&nbsp;</span>
+            <span style={{ color: "#ec4899" }}>African markets</span>
             <span>.</span>
           </div>
-          <div style={{ display: "flex", fontSize: 26, color: "#a1a1aa", maxWidth: 800 }}>
+          <div style={{ display: "flex", fontSize: 28, color: "#a1a1aa", maxWidth: 800 }}>
             RAG systems. Full-stack apps. Security. Built to launch, not to demo.
           </div>
         </div>
 
         {/* Bottom bar */}
         <div style={{ display: "flex", gap: 8, width: "100%" }}>
-          <div style={{ width: 60, height: 4, background: "#7c3aed", borderRadius: 2 }} />
-          <div style={{ width: 30, height: 4, background: "#22d3ee", borderRadius: 2 }} />
-          <div style={{ width: 15, height: 4, background: "#52525b", borderRadius: 2 }} />
+          <div style={{ width: 80, height: 6, background: "#ec4899", borderRadius: 3 }} /> {/* Pink */}
+          <div style={{ width: 40, height: 6, background: "#f472b6", borderRadius: 3 }} /> {/* Light Pink */}
+          <div style={{ width: 20, height: 6, background: "#52525b", borderRadius: 3 }} />
         </div>
       </div>
     ),

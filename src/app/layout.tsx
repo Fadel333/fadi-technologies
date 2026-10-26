@@ -34,32 +34,25 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-const themeScript = `
-(function(){
-  try {
-    var stored = localStorage.getItem('theme');
-    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
-  } catch (e) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
-})();
-`;
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#09090b] text-white min-h-screen relative`}
       >
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        {/* Subtle background glow for the "BuildWithFADI" vibe */}
+        <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-pink-500/10 blur-[120px] rounded-full pointer-events-none z-0" />
+        
+        {/* Main Content wrapped in relative z-index to sit above the glow */}
+        <div className="relative z-10 flex flex-col min-h-screen">
+          <Nav />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
+        
+        {/* Floating elements */}
         <Terminal />
         <Assistant />
       </body>

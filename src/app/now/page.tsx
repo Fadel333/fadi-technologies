@@ -3,16 +3,17 @@ import Link from "next/link";
 import { nowEntries, currentFocus, type NowEntry } from "@/content/now";
 
 export const metadata: Metadata = {
-  title: "Now",
+  title: "Now | FADI Technologies",
   description:
-    "What I'm building, learning, and thinking about right now — updated as things change.",
+    "A live log of what I'm building, learning, and thinking about right now — updated as things change.",
 };
 
+// Updated styles to match the hacker/terminal aesthetic
 const tagStyles: Record<string, string> = {
-  shipped: "text-success border-success/30 bg-success/5",
-  building: "text-accent border-accent/30 bg-accent/5",
-  learning: "text-terminal border-terminal/30 bg-terminal/5",
-  reading: "text-warning border-warning/30 bg-warning/5",
+  shipped: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+  building: "text-pink-500 border-pink-500/30 bg-pink-500/10",
+  learning: "text-blue-400 border-blue-500/30 bg-blue-500/10",
+  reading: "text-amber-400 border-amber-500/30 bg-amber-500/10",
 };
 
 function formatDate(iso: string): string {
@@ -33,24 +34,26 @@ export default function NowPage() {
     : "now";
 
   return (
-    <>
+    <div className="bg-[#09090b] min-h-screen text-white selection:bg-pink-500 selection:text-white">
       {/* Header */}
-      <section className="mx-auto max-w-5xl px-6 pt-20 pb-12">
-        <p className="font-mono text-xs uppercase tracking-wider text-fg-subtle">
-          Now
+      <section className="mx-auto max-w-5xl px-6 pt-24 pb-12">
+        <p className="font-mono text-xs uppercase tracking-widest text-pink-500 mb-6">
+          [ SYSTEM LOG ] // NOW
         </p>
-        <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-tight text-fg sm:text-5xl">
-          What I&apos;m working on,{" "}
-          <span className="text-accent">{latest}</span>.
+        <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
+          Currently executing,{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
+            {latest}
+          </span>.
         </h1>
-        <p className="mt-6 max-w-2xl text-base leading-relaxed text-fg-muted">
-          A live log of what I&apos;m building, learning, and thinking about.
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-400">
+          A live log of what I&apos;m building, learning, and thinking about. 
           Updated when things change — not on a schedule. Inspired by{" "}
           <a
             href="https://nownownow.com/about"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent underline-offset-4 hover:underline"
+            className="text-pink-500 underline-offset-4 hover:underline"
           >
             /now pages
           </a>
@@ -58,33 +61,33 @@ export default function NowPage() {
         </p>
       </section>
 
-      {/* Current focus card */}
+      {/* Current Focus Dashboard */}
       <section className="mx-auto max-w-5xl px-6 pb-16">
-        <div className="rounded-xl border border-border bg-surface p-6">
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <div>
-              <span className="font-mono text-[10px] uppercase tracking-wider text-fg-subtle">
-                Building
+        <div className="rounded-xl border border-gray-800 bg-[#121214] p-6 shadow-2xl">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="border-l-2 border-pink-500 pl-4">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-gray-500">
+                &gt;_ Building
               </span>
-              <p className="mt-1 text-sm text-fg">{currentFocus.building}</p>
+              <p className="mt-2 text-sm font-medium text-white">{currentFocus.building}</p>
             </div>
-            <div>
-              <span className="font-mono text-[10px] uppercase tracking-wider text-fg-subtle">
-                Learning
+            <div className="border-l-2 border-blue-500 pl-4">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-gray-500">
+                &gt;_ Learning
               </span>
-              <p className="mt-1 text-sm text-fg">{currentFocus.learning}</p>
+              <p className="mt-2 text-sm font-medium text-white">{currentFocus.learning}</p>
             </div>
-            <div>
-              <span className="font-mono text-[10px] uppercase tracking-wider text-fg-subtle">
-                Reading
+            <div className="border-l-2 border-amber-500 pl-4">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-gray-500">
+                &gt;_ Reading
               </span>
-              <p className="mt-1 text-sm text-fg">{currentFocus.reading}</p>
+              <p className="mt-2 text-sm font-medium text-white">{currentFocus.reading}</p>
             </div>
-            <div>
-              <span className="font-mono text-[10px] uppercase tracking-wider text-fg-subtle">
-                Open to
+            <div className="border-l-2 border-emerald-500 pl-4">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-gray-500">
+                &gt;_ Open To
               </span>
-              <p className="mt-1 text-sm text-fg">{currentFocus.open_to}</p>
+              <p className="mt-2 text-sm font-medium text-white">{currentFocus.open_to}</p>
             </div>
           </div>
         </div>
@@ -92,35 +95,35 @@ export default function NowPage() {
 
       {/* Log */}
       <section className="mx-auto max-w-5xl px-6 pb-24">
-        <div className="mb-6 flex items-center gap-3">
-          <span className="font-mono text-xs uppercase tracking-wider text-fg-subtle">
-            Log
+        <div className="mb-8 flex items-center gap-4">
+          <span className="font-mono text-xs uppercase tracking-widest text-gray-500">
+            &gt;_ Execution Log
           </span>
-          <span className="h-px flex-1 bg-border" />
-          <span className="font-mono text-xs text-fg-subtle">
-            {nowEntries.length} {nowEntries.length === 1 ? "entry" : "entries"}
+          <span className="h-px flex-1 bg-gray-800" />
+          <span className="font-mono text-xs text-gray-500">
+            {nowEntries.length} {nowEntries.length === 1 ? "entry" : "entries"} found
           </span>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-16">
           {nowEntries.map((entry: NowEntry, i) => (
             <article
               key={entry.date + i}
-              className="grid grid-cols-1 gap-4 md:grid-cols-[140px_1fr] md:gap-10"
+              className="grid grid-cols-1 gap-6 md:grid-cols-[160px_1fr] md:gap-10 group"
             >
-              {/* date column */}
-              <div className="flex flex-col gap-2">
-                <time className="font-mono text-xs text-fg-subtle">
+              {/* Date & Tags Column */}
+              <div className="flex flex-col gap-3">
+                <time className="font-mono text-xs text-gray-500">
                   {formatDate(entry.date)}
                 </time>
                 {entry.tags && entry.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-2">
                     {entry.tags.map((t) => (
                       <span
                         key={t}
-                        className={`rounded border px-1.5 py-0.5 font-mono text-[10px] ${
+                        className={`rounded-sm border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide ${
                           tagStyles[t] ||
-                          "border-border bg-surface-muted text-fg-subtle"
+                          "border-gray-700 bg-gray-800 text-gray-400"
                         }`}
                       >
                         {t}
@@ -130,12 +133,15 @@ export default function NowPage() {
                 )}
               </div>
 
-              {/* content column */}
-              <div>
-                <h2 className="text-lg font-semibold tracking-tight text-fg">
+              {/* Content Column */}
+              <div className="relative pl-6 md:pl-8 border-l border-gray-800 group-hover:border-pink-500/50 transition-colors">
+                {/* Terminal dot indicator */}
+                <div className="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-gray-700 group-hover:bg-pink-500 transition-colors" />
+                
+                <h2 className="text-xl font-bold tracking-tight text-white group-hover:text-pink-500 transition-colors">
                   {entry.title}
                 </h2>
-                <div className="mt-3 space-y-3 text-sm leading-relaxed text-fg-muted">
+                <div className="mt-4 space-y-4 text-sm leading-relaxed text-gray-400">
                   {entry.body.map((para, j) => (
                     <p key={j}>{para}</p>
                   ))}
@@ -147,23 +153,23 @@ export default function NowPage() {
       </section>
 
       {/* Footer CTA */}
-      <section className="mx-auto max-w-5xl px-6 pb-24">
-        <div className="flex flex-wrap items-center gap-3">
+      <section className="mx-auto max-w-5xl px-6 pb-24 border-t border-gray-800 pt-12">
+        <div className="flex flex-wrap items-center gap-4">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-medium text-fg transition-colors hover:bg-surface-muted"
+            className="inline-flex items-center gap-2 rounded-md border border-gray-700 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-900"
           >
             ← See the work
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+            className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-2.5 text-sm font-bold text-black transition-colors hover:bg-gray-200"
           >
-            Get in touch
+            Start a Project
             <span aria-hidden>→</span>
           </Link>
         </div>
       </section>
-    </>
+    </div>
   );
 }

@@ -92,39 +92,39 @@ export function Assistant() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Open assistant (Shift + ?)"
-        className="fixed bottom-5 left-5 z-40 flex h-9 items-center gap-2 rounded-md border border-border bg-surface px-3 font-mono text-[11px] text-fg-muted transition-colors hover:border-accent hover:text-accent"
+        className="fixed bottom-5 left-5 z-40 flex h-9 items-center gap-2 rounded-md border border-gray-800 bg-[#121214] px-3 font-mono text-[11px] text-gray-400 transition-all hover:border-pink-500 hover:text-pink-500 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)]"
         title="Ask the FADI assistant (Shift + ?)"
       >
-        <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
-        ask
+        <span className="inline-block h-1.5 w-1.5 rounded-full bg-pink-500 animate-pulse" />
+        &gt;_ ask
       </button>
     );
   }
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-start bg-black/60 p-4 backdrop-blur-sm sm:items-center sm:justify-start sm:pl-6"
+      className="fixed inset-0 z-50 flex items-end justify-start bg-black/80 p-4 backdrop-blur-sm sm:items-center sm:justify-start sm:pl-6"
       onClick={() => setOpen(false)}
     >
       <div
-        className="flex h-[560px] w-full max-w-md flex-col overflow-hidden rounded-lg border border-border bg-surface shadow-2xl"
+        className="flex h-[560px] w-full max-w-md flex-col overflow-hidden rounded-xl border border-gray-800 bg-[#09090b] shadow-[0_0_50px_rgba(236,72,153,0.15)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-border px-4 py-3">
+        <div className="flex items-center justify-between border-b border-gray-800 bg-[#121214] px-4 py-3">
           <div className="flex items-center gap-2">
-            <span className="inline-block h-2 w-2 rounded-full bg-accent" />
-            <span className="font-mono text-xs font-medium text-fg">
-              FADI assistant
+            <span className="inline-block h-2 w-2 rounded-full bg-pink-500 animate-pulse" />
+            <span className="font-mono text-xs font-bold text-white tracking-wider">
+              FADI_ASSISTANT
             </span>
           </div>
           <button
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Close assistant"
-            className="font-mono text-xs text-fg-subtle transition-colors hover:text-fg"
+            className="font-mono text-xs text-gray-500 transition-colors hover:text-white"
           >
-            esc
+            [ESC]
           </button>
         </div>
 
@@ -139,10 +139,10 @@ export function Assistant() {
               className={m.role === "user" ? "flex justify-end" : "flex justify-start"}
             >
               <div
-                className={`max-w-[85%] rounded-lg px-3 py-2 text-sm leading-relaxed ${
+                className={`max-w-[85%] rounded-lg px-4 py-3 text-sm leading-relaxed ${
                   m.role === "user"
-                    ? "bg-accent text-white"
-                    : "bg-surface-muted text-fg-muted"
+                    ? "bg-pink-600 text-white font-medium"
+                    : "bg-[#121214] border border-gray-800 text-gray-300 font-mono text-[13px]"
                 }`}
               >
                 {m.content}
@@ -152,9 +152,9 @@ export function Assistant() {
 
           {loading && (
             <div className="flex justify-start">
-              <div className="rounded-lg bg-surface-muted px-3 py-2 font-mono text-xs text-fg-subtle">
-                thinking
-                <span className="animate-pulse">…</span>
+              <div className="rounded-lg bg-[#121214] border border-gray-800 px-4 py-3 font-mono text-xs text-pink-500">
+                processing
+                <span className="animate-pulse">...</span>
               </div>
             </div>
           )}
@@ -167,7 +167,7 @@ export function Assistant() {
                   key={s}
                   type="button"
                   onClick={() => send(s)}
-                  className="rounded-full border border-border bg-surface px-3 py-1 text-xs text-fg-muted transition-colors hover:border-accent hover:text-accent"
+                  className="rounded-md border border-gray-800 bg-[#121214] px-3 py-1.5 text-xs text-gray-400 transition-colors hover:border-pink-500/50 hover:text-pink-500"
                 >
                   {s}
                 </button>
@@ -182,24 +182,24 @@ export function Assistant() {
             e.preventDefault();
             send(input);
           }}
-          className="border-t border-border p-3"
+          className="border-t border-gray-800 bg-[#121214] p-3"
         >
           <div className="flex items-center gap-2">
             <input
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="ask something..."
-              className="flex-1 rounded-md border border-border bg-bg px-3 py-2 text-sm text-fg outline-none placeholder:text-fg-subtle focus:border-accent"
+              placeholder="execute command..."
+              className="flex-1 rounded-md border border-gray-800 bg-[#09090b] px-3 py-2.5 font-mono text-sm text-white outline-none placeholder:text-gray-600 focus:border-pink-500/50 focus:ring-1 focus:ring-pink-500/50 transition-all"
               spellCheck={false}
               autoComplete="off"
             />
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              className="rounded-md bg-accent px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-md bg-pink-600 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-pink-500 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              →
+              ↗
             </button>
           </div>
         </form>

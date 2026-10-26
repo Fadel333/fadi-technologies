@@ -4,64 +4,73 @@ import { featuredProject, shippedProjects, labProjects } from "@/content/feature
 import { RepoList } from "@/components/site/repo-list";
 
 export const metadata: Metadata = {
-  title: "Work",
+  title: "Work | FADI Technologies",
   description:
     "Products shipped by FADI Technologies — AI systems, full-stack apps, and security tools for African markets.",
 };
 
+// Updated to match the dark terminal aesthetic
 const statusStyles: Record<string, string> = {
-  live: "text-success",
-  "in-progress": "text-terminal",
-  paused: "text-warning",
-  concept: "text-fg-subtle",
+  live: "text-emerald-400",
+  "in-progress": "text-pink-500",
+  paused: "text-amber-400",
+  concept: "text-gray-500",
 };
 
 export default function WorkPage() {
   const p = featuredProject;
 
   return (
-    <>
+    <div className="bg-[#09090b] min-h-screen text-white selection:bg-pink-500 selection:text-white">
       {/* Header */}
-      <section className="mx-auto max-w-5xl px-6 pt-20 pb-12">
-        <p className="font-mono text-xs uppercase tracking-wider text-fg-subtle">
-          Work
+      <section className="mx-auto max-w-5xl px-6 pt-24 pb-16">
+        <p className="font-mono text-xs uppercase tracking-widest text-pink-500 mb-6">
+          [ SYSTEM OUTPUT ] // WORK
         </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-fg sm:text-5xl">
+        <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
           Everything I&apos;ve{" "}
-          <span className="text-accent">actually shipped</span>.
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
+            actually shipped
+          </span>.
         </h1>
-        <p className="mt-6 max-w-2xl text-base leading-relaxed text-fg-muted">
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-400">
           Live products, client work, and ideas in progress. No slide decks, no
           concepts dressed up as companies. Just working software.
         </p>
       </section>
 
       {/* Flagship */}
-      <section className="mx-auto max-w-5xl px-6 pb-16">
-        <div className="mb-6 flex items-center gap-3">
-          <span className="font-mono text-xs uppercase tracking-wider text-fg-subtle">
-            Flagship
+      <section className="mx-auto max-w-5xl px-6 pb-20">
+        <div className="mb-6 flex items-center gap-4">
+          <span className="font-mono text-xs uppercase tracking-widest text-gray-500">
+            &gt;_ Flagship Product
           </span>
-          <span className="h-px flex-1 bg-border" />
+          <span className="h-px flex-1 bg-gray-800" />
         </div>
 
         <Link
           href={`/work/${p.slug}`}
-          className="group block rounded-xl border border-border bg-surface p-6 transition-colors hover:border-accent"
+          className="group block rounded-xl border border-gray-800 bg-[#121214] p-8 transition-all hover:border-pink-500/50 hover:bg-[#161618]"
         >
           <div className="flex items-start justify-between gap-6">
             <div>
-              <h2 className="text-xl font-semibold tracking-tight text-fg group-hover:text-accent">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded-sm">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Live
+                </span>
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight text-white group-hover:text-pink-500 transition-colors">
                 {p.name}
               </h2>
-              <p className="mt-1 text-sm text-accent">{p.tagline}</p>
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fg-muted">
+              <p className="mt-2 text-sm font-medium text-pink-500">{p.tagline}</p>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-gray-400">
                 {p.description}
               </p>
             </div>
             <span
               aria-hidden
-              className="text-fg-subtle transition-all group-hover:translate-x-0.5 group-hover:text-accent"
+              className="text-gray-600 transition-all group-hover:translate-x-1 group-hover:text-pink-500 text-xl"
             >
               →
             </span>
@@ -70,64 +79,66 @@ export default function WorkPage() {
       </section>
 
       {/* Shipped */}
-      <section className="mx-auto max-w-5xl px-6 pb-16">
-        <div className="mb-6 flex items-center gap-3">
-          <span className="font-mono text-xs uppercase tracking-wider text-fg-subtle">
-            Shipped
+      <section className="mx-auto max-w-5xl px-6 pb-20">
+        <div className="mb-6 flex items-center gap-4">
+          <span className="font-mono text-xs uppercase tracking-widest text-gray-500">
+            &gt;_ Shipped Projects
           </span>
-          <span className="h-px flex-1 bg-border" />
+          <span className="h-px flex-1 bg-gray-800" />
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {shippedProjects.map((proj) => (
             <Link
               key={proj.slug}
               href={`/work/${proj.slug}`}
-              className="group flex flex-col justify-between rounded-lg border border-border bg-surface p-5 transition-all hover:-translate-y-0.5 hover:border-accent"
+              className="group flex flex-col justify-between rounded-lg border border-gray-800 bg-[#121214] p-6 transition-all hover:-translate-y-1 hover:border-pink-500/50 hover:shadow-lg hover:shadow-pink-500/5"
             >
               <div className="flex items-center justify-between">
                 <span
-                  className={`inline-flex items-center gap-1.5 font-mono text-[11px] ${statusStyles[proj.status]}`}
+                  className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider ${statusStyles[proj.status]}`}
                 >
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
                   {proj.status}
                 </span>
-                <span className="font-mono text-[10px] text-fg-subtle">
+                <span className="font-mono text-[10px] text-gray-600">
                   {proj.year}
                 </span>
               </div>
-              <h3 className="mt-5 text-base font-semibold text-fg group-hover:text-accent">
-                {proj.name}
-              </h3>
-              <p className="mt-2 text-xs leading-relaxed text-fg-muted">
-                {proj.tagline}
-              </p>
+              <div className="mt-8">
+                <h3 className="text-lg font-bold text-white group-hover:text-pink-500 transition-colors">
+                  {proj.name}
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-gray-400">
+                  {proj.tagline}
+                </p>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
       {/* Lab */}
-      <section className="mx-auto max-w-5xl px-6 pb-16">
-        <div className="mb-6 flex items-center gap-3">
-          <span className="font-mono text-xs uppercase tracking-wider text-fg-subtle">
-            In the lab
+      <section className="mx-auto max-w-5xl px-6 pb-20">
+        <div className="mb-6 flex items-center gap-4">
+          <span className="font-mono text-xs uppercase tracking-widest text-gray-500">
+            &gt;_ In The Lab
           </span>
-          <span className="h-px flex-1 bg-border" />
+          <span className="h-px flex-1 bg-gray-800" />
         </div>
 
-        <div className="divide-y divide-border rounded-xl border border-border bg-surface">
+        <div className="divide-y divide-gray-800 rounded-xl border border-gray-800 bg-[#121214] overflow-hidden">
           {labProjects.map((proj) => (
             <div
               key={proj.slug}
-              className="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"
+              className="flex flex-col gap-3 p-6 sm:flex-row sm:items-center sm:justify-between hover:bg-[#161618] transition-colors"
             >
               <div>
-                <h3 className="text-sm font-medium text-fg">{proj.name}</h3>
-                <p className="mt-1 text-xs text-fg-muted">{proj.tagline}</p>
+                <h3 className="text-sm font-bold text-white">{proj.name}</h3>
+                <p className="mt-1 text-xs text-gray-400">{proj.tagline}</p>
               </div>
               <span
-                className={`shrink-0 font-mono text-[11px] ${statusStyles[proj.status]}`}
+                className={`shrink-0 font-mono text-[10px] uppercase tracking-wider ${statusStyles[proj.status]} border border-current px-2 py-1 rounded-sm`}
               >
                 {proj.status}
               </span>
@@ -138,14 +149,16 @@ export default function WorkPage() {
 
       {/* Live GitHub repos */}
       <section className="mx-auto max-w-5xl px-6 pb-24">
-        <div className="mb-6 flex items-center gap-3">
-          <span className="font-mono text-xs uppercase tracking-wider text-fg-subtle">
-            On GitHub
+        <div className="mb-6 flex items-center gap-4">
+          <span className="font-mono text-xs uppercase tracking-widest text-gray-500">
+            &gt;_ Open Source
           </span>
-          <span className="h-px flex-1 bg-border" />
+          <span className="h-px flex-1 bg-gray-800" />
         </div>
-        <RepoList />
+        <div className="rounded-xl border border-gray-800 bg-[#121214] p-6">
+          <RepoList />
+        </div>
       </section>
-    </>
+    </div>
   );
 }
